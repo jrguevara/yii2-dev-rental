@@ -32,6 +32,60 @@ use yii\helpers\Url;
                 </li>
                 <!------- END DASHBOARD ------->
 
+                <!------- INICIO ------->
+                <?php if (Yii::$app->controller->id == 'inicio' || Yii::$app->controller->id == 'tasks') {
+                    $li = "nav-item has-treeview active menu-open";
+                    $a = "nav-link active";
+                } else {
+                    $li = "nav-item ";
+                    $a = "nav-link ";
+                }
+                ?>
+                <li class="<?= $li ?>"><a class="<?= $a ?>" href="#"><i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>CRUD Yii <i class="right fas fa-angle-left"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <!-------------------------------------------------->
+                        <?php if (Yii::$app->controller->id == 'inicio' && in_array(\Yii::$app->controller->action->id, ['index'])) {
+                            $li = "nav-item active";
+                            $a = "nav-link active";
+                        } else {
+                            $li = "nav-item";
+                            $a = "nav-link";
+                        }
+                        ?>
+                        <li class="<?= $li; ?>"><a class="<?= $a; ?>" href="<?php echo Url::toRoute(['/inicio/index']); ?>"><i class="nav-icon far fa-circle text-red"></i>
+                                <p>Ejemplo de Echo</p>
+                            </a></li>
+                        <!-------------------------------------------------->
+                        <?php if (Yii::$app->controller->id == 'inicio' && in_array(\Yii::$app->controller->action->id, ['suma'])) {
+                            $li = "nav-item active";
+                            $a = "nav-link active";
+                        } else {
+                            $li = "nav-item";
+                            $a = "nav-link";
+                        }
+                        ?>
+                        <li class="<?= $li; ?>"><a class="<?= $a; ?>" href="<?php echo Url::toRoute(['/inicio/suma']); ?>"><i class="nav-icon far fa-circle text-blue"></i>
+                                <p>Ejemplo de Suma</p>
+                            </a></li>
+                        <!-------------------------------------------------->
+                        <?php if (Yii::$app->controller->id == 'tasks' && in_array(\Yii::$app->controller->action->id, ['index', 'create', 'view', 'update'])) {
+                            $li = "nav-item active";
+                            $a = "nav-link active";
+                        } else {
+                            $li = "nav-item";
+                            $a = "nav-link";
+                        }
+                        ?>
+                        <li class="<?= $li; ?>"><a class="<?= $a; ?>" href="<?php echo Url::toRoute(['/tasks/index']); ?>"><i class="nav-icon far fa-circle text-green"></i>
+                                <p>Tareas</p>
+                            </a></li>
+                        <!-------------------------------------------------->
+                    </ul>
+                </li>
+                <!------- END INICIO ------->
+
                 <!------- MENU USUARIOS ------->
                 <?php if (Yii::$app->controller->id == 'users' || Yii::$app->controller->id == 'route' || Yii::$app->controller->id == 'permission' || Yii::$app->controller->id == 'role' || Yii::$app->controller->id == 'assignment') {
                     $li = "nav-item has-treeview active menu-open";

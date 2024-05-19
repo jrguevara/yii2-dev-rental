@@ -31,7 +31,8 @@
         "kartik-v/yii2-editors": "dev-master",
         "yii2mod/yii2-rbac": "*",
         "cloudinary/cloudinary_php": "^2",
-        "yiithings/yii2-dotenv": "*"
+        "yiithings/yii2-dotenv": "*",
+        "kartik-v/yii2-date-range": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

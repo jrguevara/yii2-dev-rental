@@ -8,6 +8,7 @@ use app\modules\users\models\UserRegister;
 use yii\filters\VerbFilter;
 use app\modules\users\models\UsersSearch;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 
@@ -58,8 +59,15 @@ class UsersController extends Controller
      */
     public function actionView($id_user)
     {
+        $model = $this->findModel($id_user);
+        if (Yii::$app->user->can('UsuarioRol')) {
+            if ($model->id_user != Yii::$app->user->identity->id) {
+                throw new ForbiddenHttpException('No tienes permisos para ver este usuario');
+            }
+        }
+
         return $this->render('view', [
-            'model' => $this->findModel($id_user),
+            'model' => $model,
         ]);
     }
 
@@ -109,6 +117,12 @@ class UsersController extends Controller
     {
         $model = $this->findModel($id_user);
 
+        if (Yii::$app->user->can('UsuarioRol')) {
+            if ($model->id_user != Yii::$app->user->identity->id) {
+                throw new ForbiddenHttpException('No tienes permisos para editar este usuario');
+            }
+        }
+
         //$j = $model->password_hash;
 
         if ($model->load(Yii::$app->request->post())) {
@@ -153,6 +167,12 @@ class UsersController extends Controller
     {
         //$this->findModel($id_user)->delete();
         $model = $this->findModel($id_user);
+        if (Yii::$app->user->can('UsuarioRol')) {
+            if ($model->id_user != Yii::$app->user->identity->id) {
+                throw new ForbiddenHttpException('No tienes permisos para eliminar este usuario');
+            }
+        }
+
         $model->status = 0;
         $model->save();
 
